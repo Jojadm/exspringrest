@@ -51,8 +51,6 @@ public class ApiPersonService implements PersonService {
 		Login login = new Login ();
 		login.setEmail(emailAddress);
 		login.setPassword(passWord);
-		System.out.println("login email: " +login.getEmail());
-		System.out.println("login pw: " +login.getPassword());
 		Person p = rt.postForObject(baseUrl+"/login", login, Person.class);
 		return p;
 	}
