@@ -1,4 +1,4 @@
-package be.abis.exercise.ut;
+package be.abis.exercise;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,8 +16,15 @@ public class TestApiPersonService {
 	PersonService ps;
 	
 	@Test
-	public void testApiPersonService() {
+	public void testApiPersonServiceforId22() {
 		Person p = ps.findPerson(22);
+		assertEquals("Lady",p.getFirstName());
+		
+		
+	}
+	@Test
+	public void testApiPersonServiceforId2() {
+		Person p = ps.findPerson(2);
 		assertEquals("Lady",p.getFirstName());
 		
 		
