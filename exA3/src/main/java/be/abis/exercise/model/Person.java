@@ -10,9 +10,8 @@ public class Person {
 
 	private String firstName;
 	private String lastName;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 	private LocalDate birthDate;
-	//private int age;
 	private String emailAddress;
 	private String password;
 	private String language;

@@ -58,14 +58,12 @@ public class FilePersonRepository implements PersonRepository {
 					c.setAddress(a);
 
 					Person p = new Person();
+					String bd = vals[3];
+					LocalDate birthDate = LocalDate.parse(bd, formatter);
 					p.setPersonId(!vals[0].equals("null") ? Integer.parseInt(vals[0]) : 0);
 					p.setFirstName(!vals[1].equals("null") ? vals[1] : null);
 					p.setLastName(!vals[2].equals("null") ? vals[2] : null);
-					if (LocalDate.parse(vals[3], formatter).equals("01/01/0001")) {
-						p.setBirthDate(null);
-					} else {
-						p.setBirthDate(LocalDate.parse(vals[3], formatter)) ;
-					}						
+					p.setBirthDate(!vals[3].equals("null") ? birthDate: null);						
 					p.setEmailAddress(!vals[4].equals("null") ? vals[4] : null);
 					p.setPassword(!vals[5].equals("null") ? vals[5] : null);
 					p.setLanguage(!vals[6].equals("null") ? vals[6] : null);
@@ -175,9 +173,11 @@ public class FilePersonRepository implements PersonRepository {
 	private StringBuilder parsePerson(Person p) {
 		StringBuilder sb = new StringBuilder();
 		int nr = p.getCompany().getAddress().getNr();
+		LocalDate birthDate = p.getBirthDate();
+		String bd = formatter.format(birthDate);
 		sb.append(p.getPersonId() + ";").append(p.getFirstName() + ";").append(p.getLastName() + ";")
 				//.append((p.getAge() != 0 ? p.getAge() : null) + ";").append(p.getEmailAddress() + ";")
-				.append(p.getBirthDate() != LocalDate.parse("01/01/0001", formatter) ? p.getBirthDate() : null + ";").append(p.getEmailAddress() + ";")
+				.append(bd + ";").append(p.getEmailAddress() + ";")
 				.append(p.getPassword() + ";").append(p.getLanguage().toLowerCase() + ";")
 				.append(p.getCompany().getName() + ";").append(p.getCompany().getTelephoneNumber() + ";")
 				.append(p.getCompany().getVatNr() + ";").append(p.getCompany().getAddress().getStreet() + ";")
