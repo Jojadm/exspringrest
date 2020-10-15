@@ -1,6 +1,7 @@
 package be.abis.exercise;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -38,11 +39,14 @@ public class TestApiPersonService {
 	
 	@Test
 	public void testApiPersonServiceforDelete() throws PersonCanNotBeDeletedException {
-		ps.deletePerson(99);
+		ps.deletePerson(10);
+		Person checkp = ps.findPerson(10);
+		assertTrue(checkp==null);
 	}
 	
 	@Test
 	public void testApiPersonServiceforAddPerson() throws IOException {
+		int index=225;
 		Address a = new Address();
 		a.setStreet("Plein");
 		a.setNr(44);
@@ -56,16 +60,18 @@ public class TestApiPersonService {
 		c.setAddress(a);
 		
 		Person p = new Person();
-		p.setPersonId(200);
+		p.setPersonId(index);
 		p.setFirstName("Steve");
 		p.setLastName("Samson");
 		p.setAge(33);
 		p.setLanguage("NL");
-		p.setEmailAddress("sa@gmail.com");
+		p.setEmailAddress("s"+index+"@gmail.com");
 		p.setPassword("password");
 		p.setCompany(c);
 		
 		ps.addPerson(p);
+		Person checkp = ps.findPerson(index);
+		assertEquals("Steve",checkp.getFirstName());
 	
 	}
 
